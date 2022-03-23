@@ -1,0 +1,14 @@
+{% extends 'todo/main.html' %}
+
+{% block title %}<title>Task Detail</title>{% endblock title %}
+
+{% block content %}
+
+    <div class="card-header p-4 text-center text-light" style="background-color: #cb6767">
+        <div class="text-start">
+            <a class="btn btn-outline-dark fs-5" href="{% url 'tasks' %}">Go back</a>
+        </div>
+        <h1 class="m-0">Task: {{ task }}</h1>
+    </div>
+
+{% endblock content %}

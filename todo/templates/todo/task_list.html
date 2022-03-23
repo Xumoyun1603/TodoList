@@ -1,0 +1,55 @@
+{% extends 'todo/main.html' %}
+
+{% block content %}
+
+    <div class="card-header p-4 text-light" style="background-color: #cb6767">
+        {% if request.user.is_authenticated %}
+            <div class="text-end">
+                <a class="btn btn-outline-dark fs-5" href="{% url 'logout' %}">Logout</a>
+            </div>
+            <h1>Hello {{ request.user }}</h1>
+            <h4 class="mt-4 mb-0">You have <strong><i>{{ count }}</i></strong> incomplete task{{ count|pluralize:"s" }}</h4>
+        {% endif %}
+    </div>
+
+    <div class="card-body p-4">
+        <div class="row mb-2">
+            <div class="col-8">
+                <form class="d-flex" method="get">
+                    <input class="form-control me-2" type="search" name="search-area" value="{{ search_input }}" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-danger" type="submit">Search</button>
+                </form>
+            </div>
+            <div class="col-4 text-end" style="margin-top: -15px">
+                <a style="font-size: 44px; color: #cb6767;" href="{% url 'task-create' %}">&#43;</a>
+            </div>
+        </div>
+
+        <div class="card">
+            {% for task in tasks %}
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-9 d-flex align-items-center">
+                            {% if task.complete %}
+                                <span class="dot" style="background-color: green"></span>
+                            {% else %}
+                                <span class="dot" style="background-color: #ffc107"></span>
+                            {% endif %}
+                            <a class="mx-2" href="{% url 'task-update' task.id %}">{{ task.title }}</a>
+                        </div>
+                        <div class="col-3 d-flex align-items-center justify-content-end">
+                            <a href="{% url 'task-delete' task.id %}">
+                                <span class="fs-3 text-danger mx-1"><i class="fa fa-trash-o"></i></span>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            {% empty %}
+                <h5 class="text-center py-2">No items in list</h5>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock content %}

@@ -1,0 +1,23 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Roboto', sans-serif;
+}
+
+#hint_id_username, #hint_id_password1, #hint_id_password2 {
+    display: none;
+}
+form ul {
+    display: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.dot {
+  height: 20px;
+  width: 20px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+}
